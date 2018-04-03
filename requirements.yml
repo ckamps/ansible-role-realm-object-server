@@ -1,6 +1,18 @@
+---
+
+# First level of dependencies that align with those specified in meta/main.yml:
+
 - src: https://github.com/ckamps/ansible-role-base
   version: master
   name: base
+
+- src: https://github.com/ckamps/ansible-role-nodejs
+  version: master
+  name: nodejs
+
+# Second level and beyond depdencies that we need to get rid of from this file.
+# Need to find a way to have the Ansible provider for Test Kitchen resolve these
+# dependencies.
 
 - src: https://github.com/ckamps/ansible-role-ansible
   version: master
@@ -9,8 +21,3 @@
 - src: https://github.com/ckamps/ansible-role-python
   version: master
   name: python
-
-- src: https://github.com/ckamps/ansible-role-nodejs
-  version: master
-  name: nodejs
-
