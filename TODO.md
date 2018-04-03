@@ -1,11 +1,8 @@
 # To Do:
-#   - Ansible realm role:
-#     - Move general purpose setup tasks to separate Ansible roles:
-#       - Python PIP
-#       - Python pexpect
-#       - Node.js
-#       - Use Role dependencies to drag in these depdendencies:
-#         http://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-dependencies
+#   - Ansible role:
+#     - Git rid of DRY violation in requirements.yml. Currently, it has to include all second level
+#       dependencies and beyond. See if Ansible driver for Test Kitchen supports a more sophisticated
+#       dependency resolution capability.
 #     - Enable Cognito integration
 #   - Testing:
 #     - Test with Amazon Linux Docker image

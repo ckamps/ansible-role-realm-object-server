@@ -2,6 +2,14 @@
   version: master
   name: base
 
+- src: https://github.com/ckamps/ansible-role-ansible
+  version: master
+  name: ansible
+
+- src: https://github.com/ckamps/ansible-role-python
+  version: master
+  name: python
+
 - src: https://github.com/ckamps/ansible-role-nodejs
   version: master
   name: nodejs
