@@ -1,0 +1,12 @@
+---
+realm_os_user: ros
+realm_os_user_id: 2011
+realm_os_group: ros
+realm_os_group_id: 2011
+
+realm_home: /home/ros
+realm_instance_name: sample
+
+realm_os_service_desc: Realm Object Server
+
+realm_license_email: dummy@gmail.com

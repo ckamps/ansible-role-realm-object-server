@@ -1,0 +1,81 @@
+---
+
+- name: Create Realm OS group
+  group:
+    name: "{{ realm_os_group }}"
+    gid: "{{ realm_os_group_id }}"
+
+- name: Create Realm OS user
+  user:
+    name: "{{ realm_os_user }}"
+    comment: Realm OS
+    uid: "{{ realm_os_user_id }}"
+    group: "{{ realm_os_group }}"
+
+- name: Install Realm
+  npm:
+    name: realm-object-server
+    path: "{{ realm_home }}"
+    state: present
+  become: yes
+  become_user: "{{ realm_os_user }}"
+
+- name: Initialize Realm
+  expect: 
+    command: "{{ realm_home }}/node_modules/.bin/ros init {{ realm_instance_name }}"
+    responses:
+       Agree with your email: "{{ realm_license_email }}"
+       Would you like to receive: "N"
+  args:
+    creates: "{{ realm_home }}/{{ realm_instance_name }}"
+    chdir: "{{ realm_home }}"
+  become: yes
+  become_user: "{{ realm_os_user }}"
+
+- name: Install AWS Cognito mobile user management
+  npm:
+    name: realm-object-server-cognito-auth
+    path: "{{ realm_home }}/{{ realm_instance_name }}"
+    state: present
+  become: yes
+  become_user: "{{ realm_os_user }}"
+
+- name: Configure Realm service
+  template:
+    src: templates/index.ts.j2
+    dest: "{{ realm_home }}/{{ realm_instance_name }}/src/index.ts"
+    owner: "{{ realm_os_user }}"
+    group: "{{ realm_os_group }}"
+    mode: 0644
+
+- name: Configure Realm Startup Script
+  template:
+    src: templates/start.sh.j2
+    dest: "{{ realm_home }}/{{ realm_instance_name }}/start.sh"
+    owner: "{{ realm_os_user }}"
+    group: "{{ realm_os_group }}"
+    mode: 0744
+
+- name: Configure Realm system service
+  template:
+    src: templates/ros.service.j2
+    dest: /lib/systemd/system/ros.service
+    owner: root
+    group: root
+    mode: 0664
+
+- name: Start Realm OS service
+  systemd:
+    name: ros
+    state: started
+    daemon_reload: yes
+
+#
+# ros backup -f FAST-ROS-Production -t ./ROS-Backups
+# 
+# Enable disk volume growth:
+# lsblk
+# sudo growpart /dev/xvda 1
+# lsblk
+# sudo yum install xfsprogs
+# sudo xfs_growfs -d /dev/xvda1

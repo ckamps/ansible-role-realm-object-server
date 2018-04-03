@@ -1,0 +1,14 @@
+[Unit]
+Description={{ realm_os_service_desc }}
+Documentation=https://docs.realm.io
+After=network.target
+
+[Service]
+Type=simple
+ExecStart={{ realm_home }}/{{ realm_instance_name }}/start.sh
+WorkingDirectory={{ realm_home }}/{{ realm_instance_name }}
+Restart=on-failure
+User={{ realm_os_user }}
+
+[Install]
+WantedBy=multi-user.target
