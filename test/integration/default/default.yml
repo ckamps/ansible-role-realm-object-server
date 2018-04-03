@@ -1,4 +1,4 @@
 ---
 - hosts: localhost
   roles:
-    - realm
+    - realm-object-server

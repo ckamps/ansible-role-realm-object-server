@@ -1,0 +1,31 @@
+---
+driver:
+  name: docker
+
+platforms:
+  - name: centos
+    driver_config:
+      image: centos/systemd
+      run_command: /usr/sbin/init
+      privileged: true
+      provision_command:
+        - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+        - systemctl enable sshd.service
+
+provisioner:
+  name: ansible_playbook
+  hosts: localhost
+  ansible_verbose: false
+  ansible_verbosity: 2
+  require_chef_for_busser: false
+  require_ruby_for_busser: false
+  requirements_path: requirements.yml
+
+verifier:
+  name: serverspec
+
+suites:
+  - name: default
+    driver_config:
+      forward:
+        - 80:9080

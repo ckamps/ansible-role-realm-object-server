@@ -1,0 +1,8 @@
+- src: https://github.com/ckamps/ansible-role-base
+  version: master
+  name: base
+
+- src: https://github.com/ckamps/ansible-role-nodejs
+  version: master
+  name: nodejs
+
