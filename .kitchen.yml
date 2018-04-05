@@ -33,7 +33,7 @@ platforms:
       image_id: ami-8f08bcf7
       availability_zone: us-west-2b
       subnet_id: subnet-fd415ab5
-      associate_public_ip: true
+      associate_public_ip: false
       security_group_ids:
         - sg-0ae9bda9a4b3fa381
       interface: dns
@@ -56,7 +56,7 @@ platforms:
       image_id: ami-f2d3638a
       availability_zone: us-west-2b
       subnet_id: subnet-fd415ab5
-      associate_public_ip: true
+      associate_public_ip: false
       security_group_ids:
         - sg-0ae9bda9a4b3fa381
       interface: dns
