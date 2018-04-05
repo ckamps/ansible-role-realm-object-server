@@ -26,6 +26,7 @@
     responses:
        Agree with your email: "{{ realm_license_email }}"
        Would you like to receive: "N"
+    timeout: 300
   args:
     creates: "{{ realm_home }}/{{ realm_instance_name }}"
     chdir: "{{ realm_home }}"
