@@ -28,7 +28,7 @@ platforms:
       name: ec2
     driver_config:
       instance_type: m1.small
-      aws_ssh_key_id: ckamps-general 
+      aws_ssh_key_id: my-dev-key 
       region: us-west-2
       image_id: ami-8f08bcf7
       availability_zone: us-west-2b
@@ -42,7 +42,7 @@ platforms:
         Created-By: Test Kitchen
     transport:
       username: ec2-user
-      ssh_key: ~/ckamps-general.pem
+      ssh_key: ~/my-dev-key.pem
     provisioner:
       name: ansible_playbook
       #require_pip: true
@@ -51,7 +51,7 @@ platforms:
       name: ec2
     driver_config:
       instance_type: m1.small
-      aws_ssh_key_id: ckamps-general 
+      aws_ssh_key_id: my-dev-key 
       region: us-west-2
       image_id: ami-f2d3638a
       availability_zone: us-west-2b
@@ -65,7 +65,7 @@ platforms:
         Created-By: Test Kitchen
     transport:
       username: ec2-user
-      ssh_key: ~/ckamps-general.pem
+      ssh_key: ~/my-dev-key.pem
     provisioner:
       name: ansible_playbook
       #require_pip: true
