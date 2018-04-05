@@ -20,6 +20,19 @@
   become: yes
   become_user: "{{ realm_os_user }}"
 
+# On Amazon Linux 2 Docker instance, the expect module fails due to:
+# OSError: out of pty devices
+# As a workaround, enable non-root users to access the virtual device.
+# See following references for somewhat related background:
+#   http://adam8157.info/blog/2017/08/fix-out-of-pty-devices/
+#   https://github.com/rkt/rkt/issues/3252
+#
+- name: Apply tty workaround on Amazon Linux 2 Docker
+  file:
+    path: /dev/pts/ptmx
+    mode: 0666
+  when: ansible_virtualization_type == "docker" and ansible_distribution == "Amazon"
+
 - name: Initialize Realm
   expect: 
     command: "{{ realm_home }}/node_modules/.bin/ros init {{ realm_instance_name }}"
