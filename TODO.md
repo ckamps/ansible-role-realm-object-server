@@ -13,6 +13,4 @@
 
 ## Testing
 
-- Add automated Inspec tests
-
-- Make compatible with Amazon Linux 1.x AMI and Docker image (already works with 2.x)
+- Actually login into Realm Object Server using administrative key and Inspec

@@ -51,14 +51,6 @@ platforms:
     transport:
       username: ec2-user
       ssh_key: ~/my-dev-key.pem
-  - name: amazonlinux-1-ec2
-    driver:
-      name: ec2
-    driver_config:
-      image_id: ami-f2d3638a
-    transport:
-      username: ec2-user
-      ssh_key: ~/my-dev-key.pem
 
 provisioner:
   name: ansible_playbook
