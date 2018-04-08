@@ -26,6 +26,7 @@ platforms:
       privileged: true
       image: centos/systemd
       provision_command:
+        - yum -y install net-tools
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable sshd.service
   - name: amazonlinux-2-docker
@@ -39,7 +40,7 @@ platforms:
       # Apply workaround in that the ps command is not working out of the box
       # on Amazon Linux 2 Docker containers
       provision_command:
-        - yum -y install procps-ng
+        - yum -y install procps-ng net-tools
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable sshd.service
   - name: amazonlinux-2-ec2
@@ -69,7 +70,7 @@ provisioner:
   requirements_path: requirements.yml
 
 verifier:
-  name: serverspec
+  name: inspec
 
 suites:
   - name: default

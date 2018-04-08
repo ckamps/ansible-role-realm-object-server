@@ -39,7 +39,7 @@
     responses:
        Agree with your email: "{{ realm_license_email }}"
        Would you like to receive: "N"
-    timeout: 300
+    timeout: 1200
   args:
     creates: "{{ realm_home }}/{{ realm_instance_name }}"
     chdir: "{{ realm_home }}"
@@ -78,11 +78,17 @@
     group: root
     mode: 0664
 
-- name: Start Realm OS service
+- name: Enable and Start Realm OS service
   systemd:
     name: ros
+    enabled: true
     state: started
     daemon_reload: yes
+
+- name: Wait for startup
+  wait_for:
+    port: 9080
+    state: started
 
 #
 # ros backup -f FAST-ROS-Production -t ./ROS-Backups
